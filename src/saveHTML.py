@@ -1,7 +1,7 @@
 import requests
 import datetime
 
-setup_file = open('data/setup.txt', 'r')
+setup_file = open('data/urls_to_scrape.txt', 'r')
 URLs_to_scrape = setup_file.readlines()
 
 for url in URLs_to_scrape:
