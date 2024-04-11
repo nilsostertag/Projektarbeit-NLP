@@ -1,9 +1,21 @@
 import requests
+import datetime
 
-URL = 'https://www.chefkoch.de/rezepte/992101204469611/Thai-Red-Curry-fuer-mehrere-Variationen.html'
-page = requests.get(URL)
+setup_file = open('data/setup.txt', 'r')
+URLs_to_scrape = setup_file.readlines()
 
-with open('data/scraping/first_export.html', 'wb+') as file:
-    file.write(page.content)
+for url in URLs_to_scrape:
+
+    #URL = 'https://www.chefkoch.de/magazin/artikel/2477,0/Chefkoch/Cordon-bleu-Schnitzel-fuer-Fortgeschrittene.html'
+    page = requests.get(url)
+
+    article = url.split('/')[-1].split('.')[0]
+
+    print(article)
+
+    filename = f'export_{article}'
+
+    with open(f'data/scraping/{filename}.html', 'wb+') as file:
+        file.write(page.content)
 
 print('done.')
