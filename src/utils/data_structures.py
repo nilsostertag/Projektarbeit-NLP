@@ -1,6 +1,7 @@
 class Recipe:
-    def __init__(self, recipe_id, title, author, properties, ingredients, article):
+    def __init__(self, recipe_id, link, title, author, properties, ingredients, article):
         self.id = recipe_id
+        self.link = link
         self.title = title
         self.author = author
         self.properties = properties

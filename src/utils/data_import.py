@@ -28,6 +28,7 @@ def import_recipe_from_json(file_path: str) -> List[ds.Recipe]:
 
             imported_recipe = ds.Recipe(
                 id = source_recipe['id'],
+                link = source_recipe['link'],
                 title = source_recipe['title'],
                 author = source_recipe['author'],
                 properties = ds.Properties(

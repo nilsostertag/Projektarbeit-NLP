@@ -9,8 +9,6 @@ class Recipe_Scraper:
     def __init__(self, target_url_file):
         self.target_URLs = self.read_target_urls(target_url_file)
         self.buffered_HTML = []
-
-    def 
     
     def scrape_recipe(self, url) -> ds.Recipe:
         pass

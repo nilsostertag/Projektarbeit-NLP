@@ -2,6 +2,9 @@ import os
 import requests
 from bs4 import BeautifulSoup
 
+MAX_PAGES = 25
+
+
 class Recipe_Crawler:
 
     def __init__(self, url_pre_page: str, page: int, url_past_page: str, max_pages: int):
@@ -14,7 +17,6 @@ class Recipe_Crawler:
         self.crawled_pages = []
         self.recipe_links = []
         self.max_pages = max_pages
-
 
     def collect_links(self, base_url) -> list:
         
@@ -41,6 +43,10 @@ class Recipe_Crawler:
 
         else:
             return self.recipe_links
+        
+    def is_valid_recipe():
+        #TODO check for teaser or plus membership
+        pass
 
     def build_base_url(self, url_pre_page: str, page: int, url_past_page: str) -> str:
         search_base_url = f'{url_pre_page}s{page}{url_past_page}'
@@ -58,7 +64,7 @@ class Recipe_Crawler:
 
 
 if __name__ == '__main__':
-    rc = Recipe_Crawler('https://www.chefkoch.de/rs/', 0, 't14/Asiatisch-Rezepte.html', max_pages=1)
+    rc = Recipe_Crawler('https://www.chefkoch.de/rs/', 0, 't14/Asiatisch-Rezepte.html', max_pages = MAX_PAGES)
     recipe_links = rc.collect_links(rc.search_base_url)
     
     for link in recipe_links:
