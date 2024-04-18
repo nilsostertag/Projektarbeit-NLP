@@ -2,7 +2,7 @@ import os
 import requests
 from bs4 import BeautifulSoup
 
-class recipe_crawler:
+class Recipe_Crawler:
 
     def __init__(self, url_pre_page: str, page: int, url_past_page: str, max_pages: int):
         # build the specific page url
@@ -58,7 +58,7 @@ class recipe_crawler:
 
 
 if __name__ == '__main__':
-    rc = recipe_crawler('https://www.chefkoch.de/rs/', 0, 't14/Asiatisch-Rezepte.html', max_pages=1)
+    rc = Recipe_Crawler('https://www.chefkoch.de/rs/', 0, 't14/Asiatisch-Rezepte.html', max_pages=1)
     recipe_links = rc.collect_links(rc.search_base_url)
     
     for link in recipe_links:
