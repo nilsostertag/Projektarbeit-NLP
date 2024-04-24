@@ -30,9 +30,10 @@ class Recipe_Crawler:
 
             # Collecting links from recipe cards
             for card in self.recipe_cards:
-                link = card.find('a')['href']
-                self.recipe_links.append(link)
-                print(f'URLs collected:    {len(self.recipe_links)}')
+                if(self.is_valid_recipe(card)):
+                    link = card.find('a')['href']
+                    self.recipe_links.append(link)
+                    print(f'URLs collected:    {len(self.recipe_links)}')
 
             self.crawled_pages.append(base_url)
 
@@ -44,9 +45,15 @@ class Recipe_Crawler:
         else:
             return self.recipe_links
         
-    def is_valid_recipe():
-        #TODO check for teaser or plus membership
-        pass
+    def is_valid_recipe(self, card):
+        if card['data-vars-payed-content-type']=='plus_recipe':
+            #print(f'PLUS RECIPE FOUND! ---> {card.find('a')['href']}')
+            return False
+        elif 'recipe-campaign' in card['data-vars-campaign-id']:
+            #print(f'COMMERCIAL RECIPE FOUND! ---> {card.find('a')['href']}')
+            return False
+        else:
+            return True
 
     def build_base_url(self, url_pre_page: str, page: int, url_past_page: str) -> str:
         search_base_url = f'{url_pre_page}s{page}{url_past_page}'
