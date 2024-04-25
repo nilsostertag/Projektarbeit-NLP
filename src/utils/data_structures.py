@@ -1,5 +1,33 @@
+from typing import List
+
+class Dish_Time:
+    def __init__(self, prep: int, cook: int, sum_time: int):
+        self.prep = prep
+        self.cook = cook
+        self.sum_time = sum_time
+
+class Nutritional_Val:
+    def __init__(self, kcal: int, protein: int, fat: int, carbs: int):
+        self.kcal = kcal
+        self.protein = protein
+        self.fat = fat
+        self.carbs = carbs
+
+class Properties:
+    def __init__(self, date_published: str, nutritional_val: Nutritional_Val, dish_time: Dish_Time, tags: List[int]):
+        self.date_published = date_published
+        self.nutritional_values = nutritional_val
+        self.dish_time = dish_time
+        self.tags = tags
+
+class Ingredient:
+    def __init__(self, name: str, amount: int, unit: str):
+        self.name = name
+        self.amount = amount
+        self.unit = unit
+
 class Recipe:
-    def __init__(self, recipe_id, link, title, author, properties, ingredients, article):
+    def __init__(self, recipe_id: str, link: str, title: str, author: str, properties: Properties, ingredients: List[Ingredient], article: str):
         self.id = recipe_id
         self.link = link
         self.title = title
@@ -7,23 +35,3 @@ class Recipe:
         self.properties = properties
         self.ingredients = ingredients
         self.article = article
-
-class Properties:
-    def __init__(self, date_published, nutritional_val, dish_time, tags):
-        self.date_published = date_published
-        self.nutritional_values = nutritional_val
-        self.dish_time = dish_time
-        self.tags = tags
-
-class Nutritional_Val:
-    def __init__(self, kcal, protein, fat, carbs):
-        self.kcal = kcal
-        self.protein = protein
-        self.fat = fat
-        self.carbs = carbs
-
-class Dish_Time:
-    def __init__(self, prep, cook, sum_time):
-        self.prep = prep
-        self.cook = cook
-        self.sum_time = sum_time
