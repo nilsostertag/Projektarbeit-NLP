@@ -1,5 +1,7 @@
 from typing import List
+import bs4
 
+# Target data structure for raw scraped data
 class Dish_Time:
     def __init__(self, prep: int, cook: int, sum_time: int):
         self.prep = prep
@@ -35,3 +37,12 @@ class Recipe:
         self.properties = properties
         self.ingredients = ingredients
         self.article = article
+
+# Data structure for recipe scraping process
+class Recipe_HTML_preprocessed:
+    def __init__(self, url, header: bs4.element.Tag, ingredients: bs4.element.Tag, nutrition: bs4.element.Tag, preparation: bs4.element.Tag):
+        self.url = url
+        self.header = header
+        self.ingredients = ingredients
+        self.nutrition = nutrition
+        self.preparation = preparation
