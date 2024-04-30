@@ -33,11 +33,12 @@ class Recipe_Scraper:
 
     def scrape_data_raw(self, buffer: ds.Recipe_HTML_preprocessed) -> ds.Recipe:
         print(f'TYPE: {type(buffer.header)}')
+        print(buffer.header)
         scraped_url = str(buffer.url)
         print(scraped_url)
         scraped_id = scraped_url.split('/')[4]
         print(scraped_id)
-        scraped_title = buffer.header.find('h2').text
+        scraped_title = buffer.header.find('h2')
         print(scraped_title)
         scraped_author = buffer.preparation.find('a', attrs={'data-vars-bi-username'}).text
         print(scraped_author)
