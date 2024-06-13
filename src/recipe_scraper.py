@@ -1,7 +1,7 @@
 import os
 import requests
 import utils.data_structures as ds
-import utils.data_export as de
+#import utils.data_export as de
 from bs4 import BeautifulSoup
 from typing import List
 
@@ -9,7 +9,6 @@ TARGET_PATH_SAMPLE = os.path.join(os.path.dirname(__file__), '..', 'data', 'samp
 
 TARGET_PATH_URLS = os.path.join(os.path.dirname(__file__), '..', 'data', 'target_urls.txt')
 TARGET_PATH_EXPORT = os.path.join(os.path.dirname(__file__), '..', 'data', 'raw_data', 'scraped_recipes.json')
-MAX_BUFFER_SIZE = 48
 
 class Recipe_Scraper:
     def __init__(self, target_url_file):
@@ -21,27 +20,44 @@ class Recipe_Scraper:
         request_buffer = requests.get(request_url).text
 
         temp_buffer_soup = BeautifulSoup(request_buffer, 'html.parser')
+
+        temp_buffer_articles = temp_buffer_soup.find_all('article')
+
+        # find preparation field because of attribute error
+        temp_buffer_prep = None
+        for element in temp_buffer_articles:
+            attributes = ''.join(element.attrs['class'])
+            if not 'recipe' in attributes:
+                temp_buffer_prep = element
+
         temp_buffer = ds.Recipe_HTML_preprocessed(
             url = request_url,
             header = temp_buffer_soup.find('article', class_ = 'recipe-header'),
             ingredients = temp_buffer_soup.find('article', class_ = 'recipe-ingredients'),
             nutrition = temp_buffer_soup.find('article', class_ = 'recipe-nutrition'),
-            preparation = temp_buffer_soup.find('article', class_ = {'ds-box' 'ds-grid-float' 'ds-col-12' 'ds-col-m-8' 'ds-or-3'})
+            preparation = temp_buffer_prep,
+            tags = temp_buffer_soup.find('div', class_ = 'recipe-tags'),
+            author = temp_buffer_soup.find('div', class_ = 'recipe-author')
         )
         
         return temp_buffer
 
     def scrape_data_raw(self, buffer: ds.Recipe_HTML_preprocessed) -> ds.Recipe:
-        print(f'TYPE: {type(buffer.header)}')
-        print(buffer.header)
-        scraped_url = str(buffer.url)
-        print(scraped_url)
-        scraped_id = scraped_url.split('/')[4]
-        print(scraped_id)
-        scraped_title = buffer.header.find('h2')
-        print(scraped_title)
-        scraped_author = buffer.preparation.find('a', attrs={'data-vars-bi-username'}).text
-        print(scraped_author)
+
+        processed_recipe = ds.Recipe(None, None, None, None, None, None, None)
+
+        scr_url = str(buffer.url)
+        scr_id = scr_url.split('/')[4]
+        scr_title = buffer.header.find('h1').text
+        scr_author = buffer.author.find('span').text
+
+        scr_publishdate = buffer.header.find('span', class_ = 'recipe-date').text
+        scr_difficulty = buffer.header.find('span', class_ = 'recipe-difficulty').text
+
+        scr_nut = buffer.nutrition.find_all('div', class_ = 'ds-col-3')
+        scr_nut = self.process_nutrition(scraped_nut = scr_nut)
+        
+
         '''scraped_data = ds.Recipe(
             id = scraped_id,
             link = scraped_url,
@@ -51,6 +67,43 @@ class Recipe_Scraper:
             ingredients = scraped_ingredients,
             article = scraped_article
         )'''
+
+    def process_nutrition(self, scraped_nut) -> ds.Nutritional_Val:
+        result = ds.Nutritional_Val(None, None, None, None)
+        for element in scraped_nut:
+            tag = str(element.find('h5').text).lower()
+            val = element.text.split('\n')[len(element.text.split('\n'))-2].strip()
+
+
+            match tag:
+                case 'kcal':
+                    result.kcal = val
+                case 'eiweiß':
+                    result.protein = val
+                case 'fett':
+                    result.fat = val
+                case 'kohlenhydr.':
+                    result.carbs = val
+                case _0:
+                    pass
+
+        return result
+
+    def process_dish_time(self, scraped_dish_time) -> ds.Dish_Time:
+        #TODO
+        pass
+
+    def process_tags(self, scraped_tags):
+        #TODO
+        pass
+
+    def process_ingredients(self, scraped_ingredients):
+        #TODO
+        pass
+
+    def process_preparation(self, scraped_preparation) -> str:
+        #TODO
+        pass
 
     def import_target_urls(self, file_path):
         target_urls = []
