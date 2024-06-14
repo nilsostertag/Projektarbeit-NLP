@@ -4,6 +4,7 @@ import utils.data_structures as ds
 #import utils.data_export as de
 from bs4 import BeautifulSoup
 from typing import List
+from re import sub
 
 TARGET_PATH_SAMPLE = os.path.join(os.path.dirname(__file__), '..', 'data', 'sample.txt')
 
@@ -57,6 +58,16 @@ class Recipe_Scraper:
         scr_nut = buffer.nutrition.find_all('div', class_ = 'ds-col-3')
         scr_nut = self.process_nutrition(scraped_nut = scr_nut)
         
+        scr_dt = buffer.preparation.find_all('span', class_ = 'rds-recipe-meta__badge')
+        scr_dt = self.process_dish_time(scr_dt)
+
+        scr_tags = buffer.tags.find_all('a', class_ = 'ds-tag bi-tags')
+        scr_tags = self.process_tags(scr_tags)
+
+        scr_ingredients = buffer.ingredients.find('table', 'ingredients table-header')
+        scr_ingredients = self.process_ingredients(scr_ingredients)
+
+        scr_preparation = buffer.preparation.find_all('div', class_ = 'ds-box')
 
         '''scraped_data = ds.Recipe(
             id = scraped_id,
@@ -74,7 +85,6 @@ class Recipe_Scraper:
             tag = str(element.find('h5').text).lower()
             val = element.text.split('\n')[len(element.text.split('\n'))-2].strip()
 
-
             match tag:
                 case 'kcal':
                     result.kcal = val
@@ -90,16 +100,51 @@ class Recipe_Scraper:
         return result
 
     def process_dish_time(self, scraped_dish_time) -> ds.Dish_Time:
-        #TODO
-        pass
+        result = ds.Dish_Time(None, None, None)
+        for element in scraped_dish_time:
+            tag = element.text.split('\n')[len(element.text.split('\n'))-2].strip().lower()
+            val = sub(r'\D', '', tag)
 
-    def process_tags(self, scraped_tags):
-        #TODO
-        pass
+            if 'arbeit' in tag:
+                result.prep = val
+            elif 'koch' in tag:
+                result.cook = val
+            elif 'gesamt' in tag:
+                result.sum_time = val
 
-    def process_ingredients(self, scraped_ingredients):
-        #TODO
-        pass
+        return result
+
+    def process_tags(self, scraped_tags) -> List[str]:
+        result = []
+        
+        for element in scraped_tags:
+            val = str(element.text.strip().lower())
+            result.append(val)
+
+        return result
+
+    def process_ingredients(self, scraped_ingredients) -> List[ds.Ingredient]:
+        result = []
+
+        scraped_ingredients = scraped_ingredients.find_all('tr')
+        for element in scraped_ingredients:
+            amount = None
+            unit = None
+            amount_unit = element.find('td', class_ = 'td-left').text.strip().lower().split(' ')
+            for e in amount_unit:
+                if e.isdigit():
+                    amount = e
+                elif not e.isdigit() and e is not '':
+                    unit = e
+            ingredient = element.find('td', class_ = 'td-right').text.strip().lower()
+            buffer_result = ds.Ingredient(
+                name = ingredient,
+                amount = amount,
+                unit = unit
+            )
+            result.append(buffer_result)
+
+        return result
 
     def process_preparation(self, scraped_preparation) -> str:
         #TODO

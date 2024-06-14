@@ -19,8 +19,9 @@ class Nutritional_Val:
         self.carbs = carbs
 
 class Properties:
-    def __init__(self, date_published: str, difficulty: str, nutritional_val: Nutritional_Val, dish_time: Dish_Time, tags: List[str]):
+    def __init__(self, date_published: str, rating: float, difficulty: str, nutritional_val: Nutritional_Val, dish_time: Dish_Time, tags: List[str]):
         self.date_published = date_published
+        self.rating = rating
         self.difficulty = difficulty
         self.nutritional_values = nutritional_val
         self.dish_time = dish_time
@@ -46,7 +47,7 @@ class Recipe:
 
 # Data structure for recipe scraping process
 class Recipe_HTML_preprocessed:
-    def __init__(self, url, header: bs4.element.Tag, ingredients: bs4.element.Tag, nutrition: bs4.element.Tag, preparation: bs4.element.Tag, tags: bs4.element.Tag, author: bs4.element.Tag):
+    def __init__(self, url, header: bs4.element.Tag, ingredients: bs4.element.Tag, nutrition: bs4.element.Tag, preparation: bs4.element.Tag, tags: bs4.element.Tag, author: bs4.element.Tag, comments: bs4.element.Tag):
         self.url = url
         self.header = header
         self.ingredients = ingredients
