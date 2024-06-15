@@ -47,7 +47,7 @@ class Recipe:
 
 # Data structure for recipe scraping process
 class Recipe_HTML_preprocessed:
-    def __init__(self, url, header: bs4.element.Tag, ingredients: bs4.element.Tag, nutrition: bs4.element.Tag, preparation: bs4.element.Tag, tags: bs4.element.Tag, author: bs4.element.Tag, comments: bs4.element.Tag):
+    def __init__(self, url, header: bs4.element.Tag, ingredients: bs4.element.Tag, nutrition: bs4.element.Tag, preparation: bs4.element.Tag, tags: bs4.element.Tag, author: bs4.element.Tag):
         self.url = url
         self.header = header
         self.ingredients = ingredients
