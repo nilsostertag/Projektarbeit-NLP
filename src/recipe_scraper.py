@@ -44,40 +44,49 @@ class Recipe_Scraper:
         return temp_buffer
 
     def scrape_data_raw(self, buffer: ds.Recipe_HTML_preprocessed) -> ds.Recipe:
-
-        processed_recipe = ds.Recipe(None, None, None, None, None, None, None)
-
         scr_url = str(buffer.url)
         scr_id = scr_url.split('/')[4]
         scr_title = buffer.header.find('h1').text
         scr_author = buffer.author.find('span').text
 
-        scr_publishdate = buffer.header.find('span', class_ = 'recipe-date').text
-        scr_difficulty = buffer.header.find('span', class_ = 'recipe-difficulty').text
+        #TODO: strip date and difficulty from unnecessary signs
+        scr_publishdate = buffer.header.find('span', class_ = 'recipe-date').text.strip()
+        scr_rating = buffer.header.find('div', class_ = 'ds-rating-avg').find('strong').text
+        scr_difficulty = buffer.header.find('span', class_ = 'recipe-difficulty').text.strip()
 
         scr_nut = buffer.nutrition.find_all('div', class_ = 'ds-col-3')
         scr_nut = self.process_nutrition(scraped_nut = scr_nut)
         
         scr_dt = buffer.preparation.find_all('span', class_ = 'rds-recipe-meta__badge')
-        scr_dt = self.process_dish_time(scr_dt)
+        scr_dt = self.process_dish_time(scraped_dish_time = scr_dt)
 
         scr_tags = buffer.tags.find_all('a', class_ = 'ds-tag bi-tags')
-        scr_tags = self.process_tags(scr_tags)
+        scr_tags = self.process_tags(scraped_tags = scr_tags)
 
         scr_ingredients = buffer.ingredients.find('table', 'ingredients table-header')
-        scr_ingredients = self.process_ingredients(scr_ingredients)
+        scr_ingredients = self.process_ingredients(scraped_ingredients = scr_ingredients)
 
         scr_preparation = buffer.preparation.find_all('div', class_ = 'ds-box')
+        scr_preparation = self.process_preparation(scraped_preparation = scr_preparation)
 
-        '''scraped_data = ds.Recipe(
-            id = scraped_id,
-            link = scraped_url,
-            title = scraped_title,
-            author = scraped_author,
-            properties = scraped_properties,
-            ingredients = scraped_ingredients,
-            article = scraped_article
-        )'''
+        scraped_content = ds.Recipe(
+            recipe_id = scr_id,
+            link = scr_url,
+            title = scr_title,
+            author = scr_author,
+            properties = ds.Properties(
+                date_published = scr_publishdate,
+                rating = float(scr_rating),
+                difficulty = scr_difficulty,
+                nutritional_val = scr_nut,
+                dish_time = scr_dt,
+                tags = scr_tags
+            ),
+            ingredients = scr_ingredients,
+            preparation = scr_preparation
+        )
+
+        return scraped_content
 
     def process_nutrition(self, scraped_nut) -> ds.Nutritional_Val:
         result = ds.Nutritional_Val(None, None, None, None)
@@ -128,13 +137,13 @@ class Recipe_Scraper:
 
         scraped_ingredients = scraped_ingredients.find_all('tr')
         for element in scraped_ingredients:
-            amount = None
-            unit = None
+            amount = ''
+            unit = ''
             amount_unit = element.find('td', class_ = 'td-left').text.strip().lower().split(' ')
             for e in amount_unit:
                 if e.isdigit():
                     amount = e
-                elif not e.isdigit() and e is not '':
+                elif not e.isdigit() and e != '':
                     unit = e
             ingredient = element.find('td', class_ = 'td-right').text.strip().lower()
             buffer_result = ds.Ingredient(
@@ -147,8 +156,16 @@ class Recipe_Scraper:
         return result
 
     def process_preparation(self, scraped_preparation) -> str:
-        #TODO
-        pass
+        buffer_strings = []
+
+        for element in scraped_preparation:
+            buffer_str = element.text
+            buffer_strings.append(buffer_str)
+
+        buffer_prep = max(buffer_strings, key = len)
+        result = buffer_prep.replace('\n', '')
+
+        return result
 
     def import_target_urls(self, file_path):
         target_urls = []
