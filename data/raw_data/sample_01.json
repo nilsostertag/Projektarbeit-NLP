@@ -1,12 +1,13 @@
 [
     {
-        "link": "https://www.chefkoch.de/rezepte/2826671434712499/Haehnchen-suesssauer-wie-im-Chinarestaurant.html",
         "recipe_id": "2826671434712499",
+        "link": "https://www.chefkoch.de/rezepte/2826671434712499/Haehnchen-suesssauer-wie-im-Chinarestaurant.html",
         "title": "Hähnchen süß-sauer wie im Chinarestaurant",
         "author": "NatuerlichLecker",
         "properties": {
-            "date_published": "20180125",
+            "date_published": "2018-01-25",
             "difficulty": "normal",
+            "rating": 4.76,
             "nutritional_val": {
                 "kcal": 672,
                 "protein": 27.39,
