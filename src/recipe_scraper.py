@@ -1,7 +1,7 @@
 import os
 import requests
 import utils.data_structures as ds
-#import utils.data_export as de
+import utils.data_export as de
 from bs4 import BeautifulSoup
 from typing import List
 from re import sub
@@ -55,30 +55,35 @@ class Recipe_Scraper:
         scr_difficulty = buffer.header.find('span', class_ = 'recipe-difficulty').text.strip()
 
         scr_nut = buffer.nutrition.find_all('div', class_ = 'ds-col-3')
-        scr_nut = self.process_nutrition(scraped_nut = scr_nut)
+        if scr_nut != None:
+            scr_nut = self.process_nutrition(scraped_nut = scr_nut)
         
         scr_dt = buffer.preparation.find_all('span', class_ = 'rds-recipe-meta__badge')
-        scr_dt = self.process_dish_time(scraped_dish_time = scr_dt)
+        if scr_dt != None:
+            scr_dt = self.process_dish_time(scraped_dish_time = scr_dt)
 
         scr_tags = buffer.tags.find_all('a', class_ = 'ds-tag bi-tags')
-        scr_tags = self.process_tags(scraped_tags = scr_tags)
+        if scr_tags != None:
+            scr_tags = self.process_tags(scraped_tags = scr_tags)
 
         scr_ingredients = buffer.ingredients.find('table', 'ingredients table-header')
-        scr_ingredients = self.process_ingredients(scraped_ingredients = scr_ingredients)
+        if scr_ingredients != None:
+            scr_ingredients = self.process_ingredients(scraped_ingredients = scr_ingredients)
 
         scr_preparation = buffer.preparation.find_all('div', class_ = 'ds-box')
-        scr_preparation = self.process_preparation(scraped_preparation = scr_preparation)
+        if scr_preparation != None:
+            scr_preparation = self.process_preparation(scraped_preparation = scr_preparation)
 
         scraped_content = ds.Recipe(
             recipe_id = scr_id,
-            link = scr_url,
+            url = scr_url,
             title = scr_title,
             author = scr_author,
             properties = ds.Properties(
                 date_published = scr_publishdate,
                 rating = float(scr_rating),
                 difficulty = scr_difficulty,
-                nutritional_val = scr_nut,
+                nutritional_values = scr_nut,
                 dish_time = scr_dt,
                 tags = scr_tags
             ),
@@ -88,8 +93,8 @@ class Recipe_Scraper:
 
         return scraped_content
 
-    def process_nutrition(self, scraped_nut) -> ds.Nutritional_Val:
-        result = ds.Nutritional_Val(None, None, None, None)
+    def process_nutrition(self, scraped_nut) -> ds.Nutritional_values:
+        result = ds.Nutritional_values(None, None, None, None)
         for element in scraped_nut:
             tag = str(element.find('h5').text).lower()
             val = element.text.split('\n')[len(element.text.split('\n'))-2].strip()
@@ -108,8 +113,8 @@ class Recipe_Scraper:
 
         return result
 
-    def process_dish_time(self, scraped_dish_time) -> ds.Dish_Time:
-        result = ds.Dish_Time(None, None, None)
+    def process_dish_time(self, scraped_dish_time) -> ds.Dish_time:
+        result = ds.Dish_time(None, None, None)
         for element in scraped_dish_time:
             tag = element.text.split('\n')[len(element.text.split('\n'))-2].strip().lower()
             val = sub(r'\D', '', tag)
@@ -180,9 +185,17 @@ class Recipe_Scraper:
             temp_buffer = self.buffer_recipe(target)
             self.buffered_HTMLs.append(temp_buffer)
 
-        for buffered_recipe in self.buffered_HTMLs:
-            temp_data = self.scrape_data_raw(buffered_recipe)
+        for buffered_HTML in self.buffered_HTMLs:
+            temp_data = self.scrape_data_raw(buffered_HTML)
             self.scraped_recipes.append(temp_data)
+
+        #TODO: Export zu Json, keine Stringification möglich
+        serialized_recipes = []
+        for recipe in self.scraped_recipes:
+            buffered_json = recipe.to_json()
+            serialized_recipes.append(buffered_json)
+
+        de.export_to_json_v2(str(serialized_recipes), TARGET_PATH_EXPORT)
 
         
 
