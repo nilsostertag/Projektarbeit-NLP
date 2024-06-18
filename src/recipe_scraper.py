@@ -5,6 +5,7 @@ import utils.data_export as de
 from bs4 import BeautifulSoup
 from typing import List
 from re import sub
+from datetime import datetime
 
 TARGET_PATH_SAMPLE = os.path.join(os.path.dirname(__file__), '..', 'data', 'sample.txt')
 
@@ -15,7 +16,7 @@ class Recipe_Scraper:
     def __init__(self, target_url_file):
         self.target_URLs = self.import_target_urls(file_path = target_url_file)
         self.buffered_HTMLs: List[ds.Recipe_HTML_preprocessed] = []
-        self.scraped_recipes: List[ds.Recipe] = []
+        self.scraped_recipes: ds.Recipes = ds.Recipes(payload = [])
     
     def buffer_recipe(self, request_url):
         request_buffer = requests.get(request_url).text
@@ -51,8 +52,12 @@ class Recipe_Scraper:
 
         #TODO: strip date and difficulty from unnecessary signs
         scr_publishdate = buffer.header.find('span', class_ = 'recipe-date').text.strip()
+        scr_publishdate = self.process_publishdate(scraped_publishdate = scr_publishdate)
+
         scr_rating = buffer.header.find('div', class_ = 'ds-rating-avg').find('strong').text
+        
         scr_difficulty = buffer.header.find('span', class_ = 'recipe-difficulty').text.strip()
+        scr_difficulty = self.process_difficulty(scraped_difficulty = scr_difficulty)
 
         scr_nut = buffer.nutrition.find_all('div', class_ = 'ds-col-3')
         if scr_nut != None:
@@ -92,6 +97,23 @@ class Recipe_Scraper:
         )
 
         return scraped_content
+
+    def process_publishdate(self, scraped_publishdate) -> str:
+        val = sub(r'[^\w\s]', '', scraped_publishdate).strip()
+
+        date_format = '%d%m%Y'
+
+        dt = datetime.strptime(val, date_format)
+    
+    # Convert the datetime object to a Unix timestamp
+        timestamp = int(dt.timestamp())
+        return timestamp
+
+        return val
+
+    def process_difficulty(self, scraped_difficulty) -> str:
+        val = sub(r'[^\w\s]', '', scraped_difficulty).strip()
+        return val
 
     def process_nutrition(self, scraped_nut) -> ds.Nutritional_values:
         result = ds.Nutritional_values(None, None, None, None)
@@ -186,16 +208,13 @@ class Recipe_Scraper:
             self.buffered_HTMLs.append(temp_buffer)
 
         for buffered_HTML in self.buffered_HTMLs:
+            print(f'Processing {buffered_HTML.url}')
             temp_data = self.scrape_data_raw(buffered_HTML)
-            self.scraped_recipes.append(temp_data)
+            self.scraped_recipes.payload.append(temp_data)
 
-        #TODO: Export zu Json, keine Stringification möglich
-        serialized_recipes = []
-        for recipe in self.scraped_recipes:
-            buffered_json = recipe.to_json()
-            serialized_recipes.append(buffered_json)
-
-        de.export_to_json_v2(str(serialized_recipes), TARGET_PATH_EXPORT)
+        payload_string = self.scraped_recipes.to_json()
+        #print(payload_string)
+        de.export_to_json_v2(str(payload_string), TARGET_PATH_EXPORT)
 
         
 

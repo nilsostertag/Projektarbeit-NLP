@@ -22,7 +22,7 @@ class Properties:
     date_published: int
     rating: float
     difficulty: str
-    nutritional_values: Nutritional_values
+    nutritional_values: List[Nutritional_values]
     dish_time: Dish_time
     tags: List[str]
 
@@ -47,8 +47,13 @@ class Recipe:
     ingredients: List[Ingredient]
     preparation: str
 
+
+@dataclass
+class Recipes:
+    payload: List[Recipe]
+
     def to_json(self):
-        return json.dumps(asdict(self), indent = 2)
+        return json.dumps(asdict(self), indent = 2, ensure_ascii=False)
 
     #def __post_init__(self):
         #self.properties = Properties(**self.properties)
