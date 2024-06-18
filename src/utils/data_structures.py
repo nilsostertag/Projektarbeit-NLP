@@ -1,28 +1,78 @@
-class Recipe:
-    def __init__(self, recipe_id, title, author, properties, ingredients, article):
-        self.id = recipe_id
-        self.title = title
-        self.author = author
-        self.properties = properties
-        self.ingredients = ingredients
-        self.article = article
+from dataclasses import asdict, dataclass
+from typing import List
+import os
+import bs4
+import json
 
+@dataclass
+class Dish_time:
+    prep: int
+    cook : int
+    sum_time: int
+
+@dataclass
+class Nutritional_values:
+    kcal: int
+    protein: str
+    fat: str
+    carbs: str
+
+@dataclass
 class Properties:
-    def __init__(self, date_published, nutritional_val, dish_time, tags):
-        self.date_published = date_published
-        self.nutritional_values = nutritional_val
-        self.dish_time = dish_time
+    date_published: int
+    rating: float
+    difficulty: str
+    nutritional_values: List[Nutritional_values]
+    dish_time: Dish_time
+    tags: List[str]
+
+    #def __post_init__(self):
+        #self.nutritional_values = Nutritional_values(**self.nutritional_values)
+        #self.dish_time = Dish_time(**self.dish_time)
+        #self.tags = List[str](**self.tags)
+
+@dataclass
+class Ingredient_payload:
+    name: str
+    amount: int
+    unit: str
+
+@dataclass
+class Ingredients:
+    portions: int
+    payload: List[Ingredient_payload]
+
+@dataclass
+class Recipe:
+    recipe_id: str
+    url: str
+    title: str
+    author: str
+    properties: Properties
+    ingredients: Ingredients
+    preparation: str
+
+
+@dataclass
+class Recipes:
+    payload: List[Recipe]
+
+    def to_json(self):
+        return json.dumps(asdict(self), indent = 2, ensure_ascii=False)
+
+    #def __post_init__(self):
+        #self.properties = Properties(**self.properties)
+        #self.ingredients = [Ingredient(**ingredient) for ingredient in self.ingredients]
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Data structure for recipe scraping process
+class Recipe_HTML_preprocessed:
+    def __init__(self, url, header: bs4.element.Tag, ingredients: bs4.element.Tag, nutrition: bs4.element.Tag, preparation: bs4.element.Tag, tags: bs4.element.Tag, author: bs4.element.Tag):
+        self.url = url
+        self.header = header
+        self.ingredients = ingredients
+        self.nutrition = nutrition
+        self.preparation = preparation
         self.tags = tags
-
-class Nutritional_Val:
-    def __init__(self, kcal, protein, fat, carbs):
-        self.kcal = kcal
-        self.protein = protein
-        self.fat = fat
-        self.carbs = carbs
-
-class Dish_Time:
-    def __init__(self, prep, cook, sum_time):
-        self.prep = prep
-        self.cook = cook
-        self.sum_time = sum_time
+        self.author = author

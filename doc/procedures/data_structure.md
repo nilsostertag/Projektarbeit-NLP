@@ -18,5 +18,8 @@ struct recipe
         - cook
         - sum
     - tags
-- ingredients
+- List(ingredients)
+    - name
+    - amount
+    - unit
 - article
