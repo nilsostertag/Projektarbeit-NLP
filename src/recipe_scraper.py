@@ -50,10 +50,14 @@ class Recipe_Scraper:
         scr_id = scr_url.split('/')[4]
 
         #TODO: strip date and difficulty from unnecessary signs
+        if buffer.author != None:
+            scr_author = buffer.author.find('span')
+            if scr_author != None:
+                scr_author = scr_author.text
+                scr_author = self.process_author(scraped_author = scr_author)
+
         if buffer.header != None:
             scr_title = buffer.header.find('h1').text
-            scr_author = buffer.author.find('span').text
-            scr_author = self.process_author(scraped_author = scr_author)
             scr_rating = buffer.header.find('div', class_ = 'ds-rating-avg').find('strong').text
             scr_publishdate = buffer.header.find('span', class_ = 'recipe-date').text.strip()
             if scr_publishdate != None:
@@ -242,14 +246,19 @@ class Recipe_Scraper:
     
     def execute_process(self):
         for target in self.target_URLs:
+            print(f'[{self.target_URLs.index(target)}/{len(self.target_URLs)}] Buffering {target}')
             temp_buffer = self.buffer_recipe(target)
-            self.buffered_HTMLs.append(temp_buffer)
+            print(f'[{self.target_URLs.index(target)}/{len(self.target_URLs)}] Processing {target}')
+            temp_data = self.scrape_data_raw(temp_buffer)
+            self.scraped_recipes.payload.append(temp_data)
+            #self.buffered_HTMLs.append(temp_buffer)
 
-        for buffered_HTML in self.buffered_HTMLs:
-            print(f'Processing {buffered_HTML.url}')
+        """
+            for buffered_HTML in self.buffered_HTMLs:
+            print(f'[{self.buffered_HTMLs.index(buffered_HTML)}/{len(self.buffered_HTMLs)}] Processing {buffered_HTML.url}')
             temp_data = self.scrape_data_raw(buffered_HTML)
             self.scraped_recipes.payload.append(temp_data)
-
+        """
         payload_string = self.scraped_recipes.to_json()
         #print(payload_string)
         de.export_to_json_v2(str(payload_string), TARGET_PATH_EXPORT)
