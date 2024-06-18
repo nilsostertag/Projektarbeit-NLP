@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from typing import List
 from re import sub
 from datetime import datetime
+from math import nan
 
 TARGET_PATH_SAMPLE = os.path.join(os.path.dirname(__file__), '..', 'data', 'sample.txt')
 
@@ -47,37 +48,61 @@ class Recipe_Scraper:
     def scrape_data_raw(self, buffer: ds.Recipe_HTML_preprocessed) -> ds.Recipe:
         scr_url = str(buffer.url)
         scr_id = scr_url.split('/')[4]
-        scr_title = buffer.header.find('h1').text
-        scr_author = buffer.author.find('span').text
 
         #TODO: strip date and difficulty from unnecessary signs
-        scr_publishdate = buffer.header.find('span', class_ = 'recipe-date').text.strip()
-        scr_publishdate = self.process_publishdate(scraped_publishdate = scr_publishdate)
+        if buffer.header != None:
+            scr_title = buffer.header.find('h1').text
+            scr_author = buffer.author.find('span').text
+            scr_author = self.process_author(scraped_author = scr_author)
+            scr_rating = buffer.header.find('div', class_ = 'ds-rating-avg').find('strong').text
+            scr_publishdate = buffer.header.find('span', class_ = 'recipe-date').text.strip()
+            if scr_publishdate != None:
+                scr_publishdate = self.process_publishdate(scraped_publishdate = scr_publishdate)
 
-        scr_rating = buffer.header.find('div', class_ = 'ds-rating-avg').find('strong').text
+            scr_difficulty = buffer.header.find('span', class_ = 'recipe-difficulty').text.strip()
+            if scr_difficulty != None:
+                scr_difficulty = self.process_difficulty(scraped_difficulty = scr_difficulty)
+
+        elif buffer.header == None:
+            scr_title, scr_author, scr_publishdate, scr_difficulty = None
+            scr_rating = nan
+                
+        if buffer.nutrition != None:
+            scr_nut = buffer.nutrition.find_all('div', class_ = 'ds-col-3')
+            if scr_nut != None:
+                scr_nut = self.process_nutrition(scraped_nut = scr_nut)
+        elif buffer.nutrition == None:
+            scr_nut = None
         
-        scr_difficulty = buffer.header.find('span', class_ = 'recipe-difficulty').text.strip()
-        scr_difficulty = self.process_difficulty(scraped_difficulty = scr_difficulty)
+        if buffer.preparation != None:
+            scr_dt = buffer.preparation.find_all('span', class_ = 'rds-recipe-meta__badge')
+            if scr_dt != None:
+                scr_dt = self.process_dish_time(scraped_dish_time = scr_dt)
+            
+            scr_preparation = buffer.preparation.find_all('div', class_ = 'ds-box')
+            if scr_preparation != None:
+                scr_preparation = self.process_preparation(scraped_preparation = scr_preparation)
 
-        scr_nut = buffer.nutrition.find_all('div', class_ = 'ds-col-3')
-        if scr_nut != None:
-            scr_nut = self.process_nutrition(scraped_nut = scr_nut)
+        elif buffer.preparation == None:
+            scr_dt, scr_preparation = None
+
+        if buffer.tags != None:
+            scr_tags = buffer.tags.find_all('a', class_ = 'ds-tag bi-tags')
+            if scr_tags != None:
+                scr_tags = self.process_tags(scraped_tags = scr_tags)
+
+        elif buffer.tags == None:
+            scr_tags = None
+
+        if buffer.ingredients != None:
+            scr_ingredients_portions = buffer.ingredients.find('input', class_ = 'ds-input').get('value')
+            scr_ingredients = buffer.ingredients.find_all('table', 'ingredients table-header')
+            if scr_ingredients != None:
+                scr_ingredients = self.process_ingredients(scraped_ingredients = scr_ingredients, scraped_portions = scr_ingredients_portions)
         
-        scr_dt = buffer.preparation.find_all('span', class_ = 'rds-recipe-meta__badge')
-        if scr_dt != None:
-            scr_dt = self.process_dish_time(scraped_dish_time = scr_dt)
+        elif buffer.scr_ingredients == None:
+            scr_ingredients = None
 
-        scr_tags = buffer.tags.find_all('a', class_ = 'ds-tag bi-tags')
-        if scr_tags != None:
-            scr_tags = self.process_tags(scraped_tags = scr_tags)
-
-        scr_ingredients = buffer.ingredients.find('table', 'ingredients table-header')
-        if scr_ingredients != None:
-            scr_ingredients = self.process_ingredients(scraped_ingredients = scr_ingredients)
-
-        scr_preparation = buffer.preparation.find_all('div', class_ = 'ds-box')
-        if scr_preparation != None:
-            scr_preparation = self.process_preparation(scraped_preparation = scr_preparation)
 
         scraped_content = ds.Recipe(
             recipe_id = scr_id,
@@ -97,6 +122,11 @@ class Recipe_Scraper:
         )
 
         return scraped_content
+
+    def process_author(self, scraped_author) -> str:
+        result = scraped_author.split(' ')[len(scraped_author.split(' ')) - 1]
+        
+        return result
 
     def process_publishdate(self, scraped_publishdate) -> str:
         val = sub(r'[^\w\s]', '', scraped_publishdate).strip()
@@ -123,7 +153,7 @@ class Recipe_Scraper:
 
             match tag:
                 case 'kcal':
-                    result.kcal = val
+                    result.kcal = int(val)
                 case 'eiweiß':
                     result.protein = val
                 case 'fett':
@@ -142,11 +172,13 @@ class Recipe_Scraper:
             val = sub(r'\D', '', tag)
 
             if 'arbeit' in tag:
-                result.prep = val
+                result.prep = int(val)
             elif 'koch' in tag:
-                result.cook = val
-            elif 'gesamt' in tag:
-                result.sum_time = val
+                result.cook = int(val)
+            elif 'gesamt' in tag and result.prep != None and result.cook != None:
+                result.sum_time = int(result.prep) + int(result.cook)
+            elif 'geasmt' in tag:
+                result.sum_time = int(val)
 
         return result
 
@@ -159,27 +191,33 @@ class Recipe_Scraper:
 
         return result
 
-    def process_ingredients(self, scraped_ingredients) -> List[ds.Ingredient]:
-        result = []
+    def process_ingredients(self, scraped_ingredients, scraped_portions) -> ds.Ingredients:
+        result = ds.Ingredients(portions = None, payload = None)
+        result_payload = []
 
-        scraped_ingredients = scraped_ingredients.find_all('tr')
-        for element in scraped_ingredients:
-            amount = ''
-            unit = ''
-            amount_unit = element.find('td', class_ = 'td-left').text.strip().lower().split(' ')
-            for e in amount_unit:
-                if e.isdigit():
-                    amount = e
-                elif not e.isdigit() and e != '':
-                    unit = e
-            ingredient = element.find('td', class_ = 'td-right').text.strip().lower()
-            buffer_result = ds.Ingredient(
-                name = ingredient,
-                amount = amount,
-                unit = unit
-            )
-            result.append(buffer_result)
+        for ingredient_list in scraped_ingredients:
+            buffered_ingredients = ingredient_list.find_all('tr')
+            for element in buffered_ingredients:
+                if element.find('td', class_ = 'td-left') != None:
+                    amount = ''
+                    unit = ''
+                    amount_unit = element.find('td', class_ = 'td-left').text.strip().lower().split(' ')
+                    if amount_unit != None:
+                        for e in amount_unit:
+                            if e.isdigit():
+                                amount = e
+                            elif not e.isdigit() and e != '':
+                                unit = e
+                        ingredient = element.find('td', class_ = 'td-right').text.strip().lower()
+                        buffer_result = ds.Ingredient_payload(
+                            name = ingredient,
+                            amount = amount,
+                            unit = unit
+                        )
+                        result_payload.append(buffer_result)
 
+        result.portions = int(scraped_portions)
+        result.payload = result_payload
         return result
 
     def process_preparation(self, scraped_preparation) -> str:
@@ -192,7 +230,7 @@ class Recipe_Scraper:
         buffer_prep = max(buffer_strings, key = len)
         result = buffer_prep.replace('\n', '')
 
-        return result
+        return result.lower()
 
     def import_target_urls(self, file_path):
         target_urls = []
@@ -219,5 +257,5 @@ class Recipe_Scraper:
         
 
 if __name__ == '__main__':
-    rs = Recipe_Scraper(target_url_file = TARGET_PATH_SAMPLE)
+    rs = Recipe_Scraper(target_url_file = TARGET_PATH_URLS)
     rs.execute_process()

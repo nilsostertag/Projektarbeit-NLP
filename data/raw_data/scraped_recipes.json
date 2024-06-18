@@ -2,23 +2,23 @@
   "payload": [
     {
       "recipe_id": "2826671434712499",
-      "url": "https://www.chefkoch.de/rezepte/2826671434712499/Haehnchen-suesssauer-wie-im-Chinarestaurant.html",
+      "url": "https://www.chefkoch.de/rezepte/2826671434712499/Haehnchen-suesssauer-wie-im-Chinarestaurant.html\n",
       "title": "Hähnchen süßsauer wie im Chinarestaurant",
-      "author": "Zum Profil von NatuerlichLecker",
+      "author": "NatuerlichLecker",
       "properties": {
         "date_published": 1516834800,
         "rating": 4.67,
         "difficulty": "normal",
         "nutritional_values": {
-          "kcal": "672",
+          "kcal": 672,
           "protein": "27,39 g",
           "fat": "6,73 g",
           "carbs": "121,27 g"
         },
         "dish_time": {
-          "prep": "25",
-          "cook": "30",
-          "sum_time": "55"
+          "prep": 25,
+          "cook": 30,
+          "sum_time": 55
         },
         "tags": [
           "asien",
@@ -33,74 +33,784 @@
           "getreide"
         ]
       },
-      "ingredients": [
-        {
-          "name": "reis",
-          "amount": "250",
-          "unit": "g"
+      "ingredients": {
+        "portions": 4,
+        "payload": [
+          {
+            "name": "reis",
+            "amount": "250",
+            "unit": "g"
+          },
+          {
+            "name": "hähnchenbrüste",
+            "amount": "2",
+            "unit": ""
+          },
+          {
+            "name": "ei(er)",
+            "amount": "1",
+            "unit": ""
+          },
+          {
+            "name": "speisestärke",
+            "amount": "4",
+            "unit": "el"
+          },
+          {
+            "name": "ananas",
+            "amount": "1",
+            "unit": "dose"
+          },
+          {
+            "name": "apfelessig oder weißweinessig",
+            "amount": "7",
+            "unit": "el"
+          },
+          {
+            "name": "zucker",
+            "amount": "4",
+            "unit": "el"
+          },
+          {
+            "name": "salz",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "ketchup",
+            "amount": "2",
+            "unit": "el"
+          },
+          {
+            "name": "sojasauce",
+            "amount": "2",
+            "unit": "el"
+          },
+          {
+            "name": "öl, neutrales (z.b sonnenblumenöl)",
+            "amount": "2",
+            "unit": "el"
+          },
+          {
+            "name": "zwiebel(n)",
+            "amount": "1",
+            "unit": ""
+          },
+          {
+            "name": "paprikaschote(n)",
+            "amount": "2",
+            "unit": ""
+          }
+        ]
+      },
+      "preparation": "    heute machen wir leckeres hähnchen süßsauer wie vom chinamann. als ich noch jünger war, also ende der neunziger bzw. anfang der zweitausender jahre war chinesisches essen voll im trend und und chinarestaurants inklusive lieferdienst schossen an jeder ecke wie pilze aus dem boden. nun, 10 - 15 jahre später, habe ich mich entschlossen diese variante des damals auch bei mir so beliebten hähnchen süßsauer zu kreieren.  viel spaß mit dem rezept.zuerst wird der reis mit etwas salz gekocht, im video wird naturreis genommen, dieser hat eine garzeit von ca. 35 minuten.die hühnerbrüste werden gewaschen und in mundgerechte stücke geschnitten. nun wird ein ei in eine kleine schüssel gegeben mit pfeffer und salz gewürzt und verquirlt. in eine weitere schüssel werden 2 el speisestärke gegeben und etwas mit dem löffel verteilt. eine pfanne wird aufgeheizt.nun werden die hühnerbruststücke in die stärke gegeben und mehrmals gedreht, bis sie vollständig bedeckt sind. danach werden sie zum ei gegeben und ebenfalls gedreht bis sie vollständig mit dem ei überzogen sind.jetzt wird das mit ei überzogene fleisch in einer pfanne rundherum gebraten bis es gar ist. danach wird es auf einen teller gegeben und beiseitegestellt.als nächstes wird die ananas aus der dose abgetropft und die flüssigkeit aus der dose aufgefangen.für die sauce wird der essig mit zucker, salz, sojasauce, öl und ketchup in eine schüssel gegeben und durchgerührt.die zwiebel wird geputzt, halbiert und in feine ringe geschnitten und in der pfanne, in der die hähnchenstücke waren, angebraten. nun werden noch 2 paprikaschoten geputzt und ebenfalls in mundgerechte stücke geschnitten. diese werden dann mit der ananas zu den zwiebeln gegeben und 5 minuten mitgebraten.  dann wird die sauce dazu gegeben und alles weitere 3 minuten auf mittlerer hitze geköchelt. in der zwischenzeit werden die letzten 2 el speisestärke mit ca. 80 milliliter des ananassaftes angerührt und dann in die pfanne gegeben. danach wird alles wieder auf dem herd geben um etwas zu reduzieren. inzwischen sollte der reis fertig sein. dieser wird abgegossen und kurz beiseitegestellt, denn jetzt wird das fleisch zum gemüse in die pfanne gegeben um rasch wieder heiß zu werden. dann wird der reis auf die teller verteilt, hähnchen und gemüse darauf angerichtet und etwas sauce darauf gegossen."
+    },
+    {
+      "recipe_id": "3618671544190713",
+      "url": "https://www.chefkoch.de/rezepte/3618671544190713/Chicken-Teriyaki-der-japanische-Klassiker.html\n",
+      "title": "Chicken Teriyaki - der japanische Klassiker",
+      "author": "Das_Chrissie",
+      "properties": {
+        "date_published": 1547074800,
+        "rating": 4.79,
+        "difficulty": "simpel",
+        "nutritional_values": null,
+        "dish_time": {
+          "prep": 25,
+          "cook": 20,
+          "sum_time": 45
         },
-        {
-          "name": "hähnchenbrüste",
-          "amount": "2",
-          "unit": ""
+        "tags": [
+          "asien",
+          "gemüse",
+          "hauptspeise",
+          "reis",
+          "einfach",
+          "geflügel",
+          "braten",
+          "japan",
+          "getreide"
+        ]
+      },
+      "ingredients": {
+        "portions": 2,
+        "payload": [
+          {
+            "name": "sojasauce",
+            "amount": "4",
+            "unit": "el"
+          },
+          {
+            "name": "reiswein, mirin oder sake",
+            "amount": "4",
+            "unit": "el"
+          },
+          {
+            "name": "zucker",
+            "amount": "2",
+            "unit": "el"
+          },
+          {
+            "name": "ingwer, frisch, gerieben",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "knoblauch, fein gehackt",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "chiliflocken, optional",
+            "amount": "",
+            "unit": "tl"
+          },
+          {
+            "name": "sesam, geschält",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "hähnchenschenkel mit haut, ohne knochen",
+            "amount": "4",
+            "unit": ""
+          },
+          {
+            "name": "speisestärke",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "salz und pfeffer",
+            "amount": "",
+            "unit": ""
+          },
+          {
+            "name": "frühlingszwiebel(n), schräg in sehr dünne ringe geschnitten",
+            "amount": "1",
+            "unit": ""
+          },
+          {
+            "name": "brokkoliröschen, gedämpft, leicht gesalzen und gepfeffert",
+            "amount": "250",
+            "unit": "g"
+          },
+          {
+            "name": "sesamöl",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "reis, gegart",
+            "amount": "",
+            "unit": ""
+          }
+        ]
+      },
+      "preparation": "    sojasauce, reiswein und zucker in einer schüssel verquirlen. das original teriyaki-rezept sieht keinen ingwer, knoblauch oder chiliflocken vor, ich mag jedoch den geschmack sehr gerne.hähnchenschenkel unter kaltem wasser abbrausen, trocken tupfen, von beiden seiten minimal salzen und pfeffern (kann man auch lassen, die sojasauce der marinade liefert ja ebenfalls salz). dann ganz dünn mit speisestärke bestreuen und diese leicht ins fleisch einreiben.in einer beschichteten pfanne den sesam ohne fett bei mittlerer hitze unter häufigem rühren leicht rösten, bis er zart goldbraun ist. in ein schälchen umfüllen und beiseitestellen.die pfanne nun gut erhitzen, die pollo fino mit der hautseite nach unten in die pfanne geben. hitze auf mittelstark (bei mir stufe 6 oder 7 von 9) zurückdrehen und das fleisch so lange anbraten, bis die haut goldbraun ist (ca. 6 - 7 minuten). das fleisch wenden und von der anderen seite ebenfalls anbraten. nach weiteren 5 - 6 minuten ist das fleisch auch innen gar. aus der pfanne nehmen und mit küchenpapier das fett möglichst vollständig aus der pfanne entfernen.die marinade noch einmal kurz verquirlen und in die pfanne geben (mittlere hitze!). tief einatmen und den duft genießen! die pollo fino in die marinade geben. so lange köcheln lassen, bis sie deutlich reduziert und karamellisiert ist und die gewünschte soßige konsistenz hat. dabei das fleisch mehrfach wenden und immer wieder per löffel mit der marinade übergießen, so dass es rundum von der glänzenden soße bedeckt ist. dickt diese zu sehr ein, kann man vorsichtig teelöffelweise mit etwas wasser verdünnen. den herd ausschalten. die pollo fino aus der soße heben, kurz über der pfanne abtropfen lassen, mit der knusprigen haut nach oben auf einem brett 1-2 minuten ruhen lassen. währenddessen den reis und den brokkoli auf tellern anrichten. einige tropfen sesamöl auf den brokkoli geben. dann das fleisch mit einem sehr scharfen messer quer in 1 - 2 cm breite streifen schneiden. auf oder neben dem reis drapieren. mit der restlichen soße beträufeln, den frühlingszwiebelringen und dem sesam garnieren und genießen!anmerkungen: theoretisch kann man auch hähnchenbrustfilet verwenden, aber das fleisch der hähnchenoberkeule ist deutlich saftiger und geschmacksintensiver und ist schneller gar als ein dickes stück hähnchenbrust. ein großteil des fetts bleibt nach dem braten in der pfanne zurück und wird ja dann entfernt, landet also nicht auf dem teller bzw. den hüften.die süße des zuckers soll die salzigkeit der sojasauce deutlich überlagern, jedoch kann man durchaus auch nur die hälfte des zuckers nehmen, wenn man diese süße nicht so dominant schmecken möchte. wer gerne mehr soße mag, erhöht einfach die menge der zutaten entsprechend."
+    },
+    {
+      "recipe_id": "2766911428603391",
+      "url": "https://www.chefkoch.de/rezepte/2766911428603391/Indisches-Butter-Chicken-aus-dem-Ofen.html\n",
+      "title": "Indisches Butter Chicken aus dem Ofen",
+      "author": "VanessaV",
+      "properties": {
+        "date_published": 1429135200,
+        "rating": 4.84,
+        "difficulty": "normal",
+        "nutritional_values": null,
+        "dish_time": {
+          "prep": 30,
+          "cook": 30,
+          "sum_time": 60
         },
-        {
-          "name": "ei(er)",
-          "amount": "1",
-          "unit": ""
+        "tags": [
+          "indien",
+          "asien",
+          "hauptspeise",
+          "geflügel",
+          "schmoren"
+        ]
+      },
+      "ingredients": {
+        "portions": 2,
+        "payload": [
+          {
+            "name": "hähnchenbrust",
+            "amount": "500",
+            "unit": "g"
+          },
+          {
+            "name": "paprikapulver",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "limonensaft oder zitronensaft",
+            "amount": "1",
+            "unit": "el"
+          },
+          {
+            "name": "salz",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "joghurt (150 g)",
+            "amount": "1",
+            "unit": "becher"
+          },
+          {
+            "name": "cayennepfeffer",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "garam masala",
+            "amount": "1",
+            "unit": "el"
+          },
+          {
+            "name": "knoblauch",
+            "amount": "1",
+            "unit": "zehe/n"
+          },
+          {
+            "name": "ingwer, daumengroß",
+            "amount": "1",
+            "unit": "stück(e)"
+          },
+          {
+            "name": "butter",
+            "amount": "4",
+            "unit": "el"
+          },
+          {
+            "name": "zwiebel(n)",
+            "amount": "1",
+            "unit": ""
+          },
+          {
+            "name": "tomaten, passierte",
+            "amount": "500",
+            "unit": "g"
+          },
+          {
+            "name": "zimt",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "salz",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "cayennepfeffer",
+            "amount": "2",
+            "unit": "tl"
+          },
+          {
+            "name": "ingwer, daumengroß",
+            "amount": "1",
+            "unit": "stück(e)"
+          },
+          {
+            "name": "knoblauch",
+            "amount": "1",
+            "unit": "zehe/n"
+          },
+          {
+            "name": "honig",
+            "amount": "1",
+            "unit": "el"
+          },
+          {
+            "name": "sahne",
+            "amount": "150",
+            "unit": "ml"
+          },
+          {
+            "name": "korianderblätter, optional",
+            "amount": "",
+            "unit": "einige"
+          }
+        ]
+      },
+      "preparation": "    die hähnchenbrust in stücke schneiden. aus paprikapulver, limonen- bzw. zitronensaft, salz, joghurt, cayennepfeffer, garam masala, ingwer und knoblauchzehe eine marinade herstellen. das fleisch mit der marinade mischen. mindestens eine stunde einziehen lassen. tipp: besser ist es, das fleisch bereits am vortag zu marinieren und über nacht in den kühlschrank zu stellen.den ofen auf 200 °c ober-/unterhitze vorheizen, dann das fleisch in einer auflaufform für 25 minuten darin garen.die zwiebel klein hacken und in 2 el butter glasig anschwitzen. die passierten tomaten, den zimt, salz, cayennepfeffer, ingwer und knoblauchzehe hinzugeben. alles 20 minuten mit deckel und bei niedriger temperatur köcheln lassen. gelegentlich umrühren. nun die restlichen 2 el butter, den honig und die sahne hinzufügen, weitere 3 minuten köcheln. das fleisch aus der marinade nehmen, in die soße geben, kurz umrühren und 2 minuten mitköcheln lassen.dazu passt reis oder naan.tipp: wer gerne koriandergrün mag, der kann ganz am ende noch ein paar frisch gehackte blätter hinzufügen."
+    },
+    {
+      "recipe_id": "63051022929691",
+      "url": "https://www.chefkoch.de/rezepte/63051022929691/Gebratene-Nudeln.html\n",
+      "title": "Gebratene Nudeln",
+      "author": "niciha",
+      "properties": {
+        "date_published": 1023055200,
+        "rating": 4.29,
+        "difficulty": "simpel",
+        "nutritional_values": {
+          "kcal": 791,
+          "protein": "43,90 g",
+          "fat": "26,76 g",
+          "carbs": "94,11 g"
         },
-        {
-          "name": "speisestärke",
-          "amount": "4",
-          "unit": "el"
+        "dish_time": {
+          "prep": 10,
+          "cook": 15,
+          "sum_time": 25
         },
-        {
-          "name": "ananas",
-          "amount": "1",
-          "unit": "dose"
+        "tags": [
+          "asien",
+          "fleisch",
+          "hauptspeise",
+          "nudeln",
+          "raffiniert oder preiswert",
+          "schnell",
+          "einfach",
+          "fettarm",
+          "geflügel",
+          "china",
+          "wok"
+        ]
+      },
+      "ingredients": {
+        "portions": 2,
+        "payload": [
+          {
+            "name": "chinesische eiernudeln, gekocht",
+            "amount": "250",
+            "unit": "g"
+          },
+          {
+            "name": "sojasprossen oder mungobohnenkeimlinge",
+            "amount": "200",
+            "unit": "g"
+          },
+          {
+            "name": "lauchzwiebel(n), klein geschnitten",
+            "amount": "1",
+            "unit": "kleine"
+          },
+          {
+            "name": "öl",
+            "amount": "",
+            "unit": "b."
+          },
+          {
+            "name": "sojasauce",
+            "amount": "",
+            "unit": "b."
+          },
+          {
+            "name": "sambal oelek",
+            "amount": "",
+            "unit": "b."
+          },
+          {
+            "name": "paprikapulver",
+            "amount": "",
+            "unit": "b."
+          },
+          {
+            "name": "currypulver",
+            "amount": "",
+            "unit": "b."
+          },
+          {
+            "name": "chilipulver",
+            "amount": "",
+            "unit": "b."
+          },
+          {
+            "name": "geflügelfleisch",
+            "amount": "200",
+            "unit": "g"
+          }
+        ]
+      },
+      "preparation": "                    asien                                    fleisch                                    hauptspeise                                    nudeln                                    raffiniert oder preiswert                                    schnell                                    einfach                                    fettarm                                    geflügel                                    china                                    wok                "
+    },
+    {
+      "recipe_id": "1651831272990064",
+      "url": "https://www.chefkoch.de/rezepte/1651831272990064/Pikante-Thai-Suppe-mit-Kokos-und-Huehnchen.html\n",
+      "title": "Pikante Thai-Suppe mit Kokos und Hühnchen",
+      "author": "mila_d",
+      "properties": {
+        "date_published": 1273010400,
+        "rating": 4.73,
+        "difficulty": "normal",
+        "nutritional_values": null,
+        "dish_time": {
+          "prep": 20,
+          "cook": 10,
+          "sum_time": 30
         },
-        {
-          "name": "apfelessig oder weißweinessig",
-          "amount": "7",
-          "unit": "el"
+        "tags": [
+          "asien",
+          "gemüse",
+          "hauptspeise",
+          "suppe",
+          "gebunden",
+          "geflügel",
+          "eintopf",
+          "thailand",
+          "gekocht"
+        ]
+      },
+      "ingredients": {
+        "portions": 4,
+        "payload": [
+          {
+            "name": "hühnerbrust, gewürfelt",
+            "amount": "300",
+            "unit": "g"
+          },
+          {
+            "name": "frühlingszwiebel(n)",
+            "amount": "1",
+            "unit": "bund"
+          },
+          {
+            "name": "ingwerwurzel oder 2 tl gemahlen",
+            "amount": "2",
+            "unit": "cm"
+          },
+          {
+            "name": "hühnerbrühe",
+            "amount": "1",
+            "unit": "liter"
+          },
+          {
+            "name": "kokosmilch, ca. 400 ml",
+            "amount": "1",
+            "unit": "dose"
+          },
+          {
+            "name": "sojasauce",
+            "amount": "3",
+            "unit": "el"
+          },
+          {
+            "name": "currypaste, rot oder grün",
+            "amount": "2",
+            "unit": "tl"
+          },
+          {
+            "name": "paprikaschote(n), rote, gewürfelt",
+            "amount": "1",
+            "unit": ""
+          },
+          {
+            "name": "champignons, gewürfelt",
+            "amount": "100",
+            "unit": "g"
+          },
+          {
+            "name": "zitronengras oder 1 - 2 tl getrocknet",
+            "amount": "1",
+            "unit": "stängel"
+          },
+          {
+            "name": "chilischote(n), frische oder getrocknet, gehackt",
+            "amount": "1",
+            "unit": ""
+          },
+          {
+            "name": "chinesische eiernudeln",
+            "amount": "125",
+            "unit": "g"
+          },
+          {
+            "name": "öl",
+            "amount": "1",
+            "unit": "el"
+          },
+          {
+            "name": "koriandergrün, geschnitten",
+            "amount": "1",
+            "unit": "handvoll"
+          },
+          {
+            "name": "salz und pfeffer",
+            "amount": "",
+            "unit": ""
+          },
+          {
+            "name": "chilifäden zum garnieren",
+            "amount": "",
+            "unit": "evtl."
+          }
+        ]
+      },
+      "preparation": "    das hühnerfleisch in kleine stücke schneiden und im topf kurz anbraten. die frühlingszwiebeln in ringe schneiden und den ingwer in kleine stücke. beides zufügen und kurz mitbraten. mit der hühnerbrühe ablöschen. kokosmilch, sojasauce und currypaste hinzufügen. das zitronengras längs kreuzweise einschneiden, sodass es noch am stück bleibt, dann kann man es später einfacher wieder entnehmen, und in die suppe geben.5 minuten kochen, das restliche gemüse und die gewürze hinzufügen. die nudeln nach packungsangabe kochen und hinzufügen.wer mag, kann noch ein wenig frischen koriander aufheben und am schluss über die suppe streuen. ich habe ab und zu noch getrocknete chilifäden zum garnieren verwendet.anmerkung der redaktion:viki röstet die currypaste bereits zusammen mit ingwer, chili und etwas speiseöl an, dadurch wird der geschmack intensiver. anstatt frühlingszwiebeln könnt ihr auch schalotten oder zwiebeln verwenden. sie gibt die paprikastreifen etwas früher, als die pilze und die nudeln in die suppe, damit sie schön gar werden und so besser zu verdauen sind. viki gibt zum verfeinern noch zwei prisen zucker in die suppe. zum anrichten drapiert viki zunächst ein paar nudeln und etwas gemüse in einen tiefen teller, bevor sie ihn mit suppe aufgießt. zum schluss garniert sie die suppe mit frischem koriander und etwas minze."
+    },
+    {
+      "recipe_id": "3676711553884546",
+      "url": "https://www.chefkoch.de/rezepte/3676711553884546/Gemuese-nach-Gonbao-Art.html\n",
+      "title": "Gemüse nach Gonbao-Art",
+      "author": "zuiko",
+      "properties": {
+        "date_published": 1554415200,
+        "rating": 4.79,
+        "difficulty": "normal",
+        "nutritional_values": null,
+        "dish_time": {
+          "prep": 15,
+          "cook": 15,
+          "sum_time": 30
         },
-        {
-          "name": "zucker",
-          "amount": "4",
-          "unit": "el"
+        "tags": [
+          "asien",
+          "gemüse",
+          "hauptspeise",
+          "vegetarisch",
+          "saucen",
+          "schnell",
+          "einfach",
+          "braten",
+          "china",
+          "pilze"
+        ]
+      },
+      "ingredients": {
+        "portions": 3,
+        "payload": [
+          {
+            "name": "speisestärke",
+            "amount": "2",
+            "unit": "gehäuft"
+          },
+          {
+            "name": "wasser, kalt",
+            "amount": "3",
+            "unit": "el"
+          },
+          {
+            "name": "zucker",
+            "amount": "3",
+            "unit": "el"
+          },
+          {
+            "name": "reisessig",
+            "amount": "3",
+            "unit": "el"
+          },
+          {
+            "name": "sojasauce, hell",
+            "amount": "3",
+            "unit": "el"
+          },
+          {
+            "name": "sojasauce, dunkel",
+            "amount": "2",
+            "unit": "el"
+          },
+          {
+            "name": "knoblauch, fein gehackt",
+            "amount": "1",
+            "unit": "zehe/n"
+          },
+          {
+            "name": "paprikaschote(n)",
+            "amount": "2",
+            "unit": ""
+          },
+          {
+            "name": "chilischote(n)",
+            "amount": "",
+            "unit": "b."
+          },
+          {
+            "name": "champignons",
+            "amount": "500",
+            "unit": "g"
+          },
+          {
+            "name": "frühlingszwiebel(n)",
+            "amount": "1",
+            "unit": "bund"
+          },
+          {
+            "name": "erdnüsse, geröstet",
+            "amount": "1",
+            "unit": "handvoll"
+          },
+          {
+            "name": "sonnenblumenöl zum braten",
+            "amount": "",
+            "unit": ""
+          },
+          {
+            "name": "salz und pfeffer",
+            "amount": "",
+            "unit": ""
+          }
+        ]
+      },
+      "preparation": "    für die gonbao-sauce die speisestärke in 3 el kaltem wasser auflösen. die übrigen zutaten für die sauce dazugeben und alles miteinander verrühren.die champignons vierteln, frühlingszwiebeln in ringe schneiden, paprikaschoten in würfel schneiden, chilischoten fein hacken.im wok oder einer hohen pfanne etwas sonnenblumenöl erhitzen und zunächst die paprika sowie die fein gehackten chilischoten bei mittlerer bis hoher hitze anbraten. nach ungefähr 3 minuten die champignons dazugeben. alles mit pfeffer und salz würzen und weitere 5 minuten unter ständigem rühren anbraten.die gonbao-sauce sowie die frühlingszwiebeln in den wok geben. die sauce einmal aufkochen lassen. dann die hitze reduzieren und die gerösteten erdnüsse dazugeben. das gemüse solange weiter braten, bis es gar, aber noch bissfest ist.das gemüse nach gonbao-art mit gekochtem reis oder chinesischen nudeln servieren."
+    },
+    {
+      "recipe_id": "2138301343656711",
+      "url": "https://www.chefkoch.de/rezepte/2138301343656711/Naanbrot.html\n",
+      "title": "Naanbrot",
+      "author": "youdid91",
+      "properties": {
+        "date_published": 1343599200,
+        "rating": 4.8,
+        "difficulty": "simpel",
+        "nutritional_values": {
+          "kcal": 159,
+          "protein": "4,35 g",
+          "fat": "1,99 g",
+          "carbs": "30,20 g"
         },
-        {
-          "name": "salz",
-          "amount": "1",
-          "unit": "tl"
+        "dish_time": {
+          "prep": 30,
+          "cook": null,
+          "sum_time": null
         },
-        {
-          "name": "ketchup",
-          "amount": "2",
-          "unit": "el"
+        "tags": [
+          "indien",
+          "asien",
+          "backen",
+          "vegetarisch",
+          "beilage",
+          "party",
+          "einfach",
+          "kalorienarm",
+          "brot oder brötchen"
+        ]
+      },
+      "ingredients": {
+        "portions": 1,
+        "payload": [
+          {
+            "name": "mehl",
+            "amount": "250",
+            "unit": "g"
+          },
+          {
+            "name": "backpulver",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "salz",
+            "amount": "1",
+            "unit": "tl"
+          },
+          {
+            "name": "joghurt",
+            "amount": "30",
+            "unit": "g"
+          },
+          {
+            "name": "wasser, lauwarmes",
+            "amount": "125",
+            "unit": "g"
+          },
+          {
+            "name": "butter",
+            "amount": "",
+            "unit": "etwas"
+          }
+        ]
+      },
+      "preparation": "    das mehl mit dem salz und dem backpulver vermischen und dann den joghurt und das wasser unterkneten.den teig mit einer folie abdecken und eine stunde ruhen lassen.den teig in 6 portionen teilen. jede portion zu einem fladen ausrollen und dünn mit butter bestreichen, dann einmal mit der butterseite nach außen zusammenklappen und nochmals flach ausrollen. in einer heißen pfanne ohne zusätzliches fett jede seite ca. eine minute backen.dazu passt gut knoblauchquark oder man isst sie zu currygerichten."
+    },
+    {
+      "recipe_id": "3349461497789523",
+      "url": "https://www.chefkoch.de/rezepte/3349461497789523/Katsudon.html",
+      "title": "Katsudon",
+      "author": "Lala0904",
+      "properties": {
+        "date_published": 1498428000,
+        "rating": 4.7,
+        "difficulty": "normal",
+        "nutritional_values": null,
+        "dish_time": {
+          "prep": 30,
+          "cook": 30,
+          "sum_time": 60
         },
-        {
-          "name": "sojasauce",
-          "amount": "2",
-          "unit": "el"
-        },
-        {
-          "name": "öl, neutrales (z.b sonnenblumenöl)",
-          "amount": "2",
-          "unit": "el"
-        },
-        {
-          "name": "zwiebel(n)",
-          "amount": "1",
-          "unit": ""
-        },
-        {
-          "name": "paprikaschote(n)",
-          "amount": "2",
-          "unit": ""
-        }
-      ],
-      "preparation": "    Heute machen wir leckeres Hähnchen süßsauer wie vom Chinamann. Als ich noch jünger war, also Ende der Neunziger bzw. Anfang der Zweitausender Jahre war chinesisches Essen voll im Trend und und Chinarestaurants inklusive Lieferdienst schossen an jeder Ecke wie Pilze aus dem Boden. Nun, 10 - 15 Jahre später, habe ich mich entschlossen diese Variante des damals auch bei mir so beliebten Hähnchen süßsauer zu kreieren.  Viel Spaß mit dem Rezept.Zuerst wird der Reis mit etwas Salz gekocht, im Video wird Naturreis genommen, dieser hat eine Garzeit von ca. 35 Minuten.Die Hühnerbrüste werden gewaschen und in mundgerechte Stücke geschnitten. Nun wird ein Ei in eine kleine Schüssel gegeben mit Pfeffer und Salz gewürzt und verquirlt. In eine weitere Schüssel werden 2 EL Speisestärke gegeben und etwas mit dem Löffel verteilt. Eine Pfanne wird aufgeheizt.Nun werden die Hühnerbruststücke in die Stärke gegeben und mehrmals gedreht, bis sie vollständig bedeckt sind. Danach werden sie zum Ei gegeben und ebenfalls gedreht bis sie vollständig mit dem Ei überzogen sind.Jetzt wird das mit Ei überzogene Fleisch in einer Pfanne rundherum gebraten bis es gar ist. Danach wird es auf einen Teller gegeben und beiseitegestellt.Als nächstes wird die Ananas aus der Dose abgetropft und die Flüssigkeit aus der Dose aufgefangen.Für die Sauce wird der Essig mit Zucker, Salz, Sojasauce, Öl und Ketchup in eine Schüssel gegeben und durchgerührt.Die Zwiebel wird geputzt, halbiert und in feine Ringe geschnitten und in der Pfanne, in der die Hähnchenstücke waren, angebraten. Nun werden noch 2 Paprikaschoten geputzt und ebenfalls in mundgerechte Stücke geschnitten. Diese werden dann mit der Ananas zu den Zwiebeln gegeben und 5 Minuten mitgebraten.  Dann wird die Sauce dazu gegeben und alles weitere 3 Minuten auf mittlerer Hitze geköchelt. In der Zwischenzeit werden die letzten 2 EL Speisestärke mit ca. 80 Milliliter des Ananassaftes angerührt und dann in die Pfanne gegeben. Danach wird alles wieder auf dem Herd geben um etwas zu reduzieren. Inzwischen sollte der Reis fertig sein. Dieser wird abgegossen und kurz beiseitegestellt, denn jetzt wird das Fleisch zum Gemüse in die Pfanne gegeben um rasch wieder heiß zu werden. Dann wird der Reis auf die Teller verteilt, Hähnchen und Gemüse darauf angerichtet und etwas Sauce darauf gegossen."
+        "tags": [
+          "asien",
+          "gemüse",
+          "hauptspeise",
+          "reis",
+          "schwein",
+          "frittieren",
+          "japan",
+          "ei",
+          "getreide"
+        ]
+      },
+      "ingredients": {
+        "portions": 2,
+        "payload": [
+          {
+            "name": "sushi-reis oder rundkornreis",
+            "amount": "200",
+            "unit": "g"
+          },
+          {
+            "name": "wasser, kaltes",
+            "amount": "250",
+            "unit": "ml"
+          },
+          {
+            "name": "schweineschnitzel oder minutensteaks",
+            "amount": "4",
+            "unit": ""
+          },
+          {
+            "name": "panko oder semmelbrösel",
+            "amount": "50",
+            "unit": "g"
+          },
+          {
+            "name": "ei(er)",
+            "amount": "2",
+            "unit": ""
+          },
+          {
+            "name": "frühlingszwiebel(n)",
+            "amount": "2",
+            "unit": ""
+          },
+          {
+            "name": "sojasauce",
+            "amount": "3",
+            "unit": "el"
+          },
+          {
+            "name": "mirin",
+            "amount": "2",
+            "unit": "el"
+          },
+          {
+            "name": "sake (kochsake)",
+            "amount": "2",
+            "unit": "el"
+          },
+          {
+            "name": "dashi oder gemüsebrühe",
+            "amount": "200",
+            "unit": "ml"
+          },
+          {
+            "name": "salz und pfeffer",
+            "amount": "",
+            "unit": ""
+          },
+          {
+            "name": "öl, neutrales zum frittieren",
+            "amount": "",
+            "unit": "b."
+          }
+        ]
+      },
+      "preparation": "    den reis in einen kochtopf geben und mit kaltem wasser und einer hand durchwaschen, das wasser abgießen und mehrmals (ca. 4 - 5-mal) wiederholen, bis das wasser klar ist. zum abschluss 250 ml kaltes wasser hinzugeben, sodass der reis leicht bedeckt ist.den reis bei hoher flamme einmal aufkochen lassen, bis er schäumt, dann sofort die herdplatte ausschalten und den topfdeckel auflegen. den topfdeckel 20 min. nicht anheben, sondern den reis so stehen lassen. keine angst, es klebt nichts an. in der zwischenzeit die schweineschnitzel waschen und trocken tupfen. das ei auf einem flachen teller verquirlen, mit salz und pfeffer leicht würzen, das panko auf einen anderen teller geben.die schweineschnitzel jeweils nacheinander komplett durch das ei ziehen und dann von beiden seiten im panko wälzen. das panko gut andrücken und auf allen seiten gleichmäßig verteilen. anders als beim wiener schnitzel wird hier auf mehl verzichtet.die schweineschnitzel nacheinander in einer pfanne in heißem öl frittieren und auf einem teller mit küchenpapier abtropfen lassen. nicht am öl sparen, die schnitzel müssen mindestens bis zur hälfte der dicke des fleisches darin liegen, sonst backen sie an und verbrennen! das öl ist heiß genug, wenn sich an einem holzkochlöffel, den man hineinhält, kleine bläschen am holz bilden. die schnitzel in mundgerechte stücke schneiden und im ofen bei ca. 80 - 100 °c auf dem teller mit küchenpapier bei ober-unterhitze warm halten.die frühlingszwiebeln in ringe schneiden. dashi, mirin, sojasauce und sake bei mittlerer hitze in einer großen pfanne zum kochen bringen. die in streifen geschnittenen schnitzel hineingeben. das 2. ei verquirlen und nach etwa 2 minuten dazugeben, die hitze dabei stark reduzieren (auf stufe 1 oder 2, je nach herd). zuletzt die frühlingszwiebeln oben drauf streuen und etwa noch 2 minuten kochen lassen. das ei sollte nun gestockt sein und die schnitzel von der unterseite her die flüssigkeit gut aufgenommen haben.den reis im topf einmal vorsichtig mit einem befeuchteten holzlöffel wenden und je die hälfte auf tiefe teller geben. die schnitzel mit der soßen-eiermischung darüberlegen und warm servieren.katsudon ist ein beliebtes japanisches gericht, das gerne vor prüfungen gegessen wird, denn das wort \"katsu\" als verb bedeutet so viel wie \"siegen\"."
     }
   ]
 }

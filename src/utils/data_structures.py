@@ -32,10 +32,15 @@ class Properties:
         #self.tags = List[str](**self.tags)
 
 @dataclass
-class Ingredient:
+class Ingredient_payload:
     name: str
     amount: int
     unit: str
+
+@dataclass
+class Ingredients:
+    portions: int
+    payload: List[Ingredient_payload]
 
 @dataclass
 class Recipe:
@@ -44,7 +49,7 @@ class Recipe:
     title: str
     author: str
     properties: Properties
-    ingredients: List[Ingredient]
+    ingredients: Ingredients
     preparation: str
 
 
