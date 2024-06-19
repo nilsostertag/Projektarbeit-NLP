@@ -1,0 +1,38 @@
+{
+    "asia": [
+        "https://www.chefkoch.de/rs/s0t14/Asiatisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t148/Japanisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t13/Indisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t103/Tuerkisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t163/Naher-Osten-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t212/Russisch-Rezepte.html"
+    ],
+    "africa": [
+        "https://www.chefkoch.de/rs/s0t168/Aegyptisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t131/Marokkanisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t101/Afrikanisch-Rezepte.html"
+    ],
+    "northamerica": [
+        "https://www.chefkoch.de/rs/s0t38/Amerikanisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t74/Mexikanisch-Rezepte.html"
+
+    ],
+    "southamerica": [
+        "https://www.chefkoch.de/rs/s0t95/Karibisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t114/Lateinamerikanisch-Rezepte.html"
+    ],
+    "europe": [
+        "https://www.chefkoch.de/rs/s0t65/Deutsch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t28/Italienisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t43/Spanisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t149/Portugiesisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t84/Franzoesisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t117/Englisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t86/Osteuropaeisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t133/Skandinavisch-Rezepte.html",
+        "https://www.chefkoch.de/rs/s0t44/Griechisch-Rezepte.html"
+    ],
+    "oceania": [
+        "https://www.chefkoch.de/rs/s0t145/Australisch-Rezepte.html"
+    ]
+}

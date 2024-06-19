@@ -1,3 +1,9 @@
+import json
+from dataclasses import asdict
+import utils.data_export as de
+import utils.data_structures as ds
+from typing import List
+
 """
 Autor:     Ostertag
 
@@ -42,7 +48,7 @@ class Recipe_Crawler:
                 if(self.is_valid_recipe(card)):
                     link = card.find('a')['href']
                     self.recipe_links.append(link)
-                    print(f'URLs collected:    {len(self.recipe_links)}')
+                    #print(f'URLs collected:    {len(self.recipe_links)}')
 
             self.crawled_pages.append(base_url)
 
@@ -68,23 +74,44 @@ class Recipe_Crawler:
         search_base_url = f'{url_pre_page}s{page}{url_past_page}'
         return search_base_url
 
-    def save_target_urls(self, to_save: list):
-        file_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'target_urls.txt')
-        try:
-            with open(file_path, 'w') as file_target_URLs:
-                for url in to_save:
-                    file_target_URLs.write(url + '\n')
-            print('Target URLs have been saved.')
-        except:
-            print('Error while saving target URLs.')
+    def save_target_urls(self, to_save: ds.Regional_URL_Collection):
+        file_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'target_urls.json')
+        stream = to_save.to_json()
+        de.export_to_json_v2(str(stream), file_path)
+        print('Target URLs have been saved.')
 
+def generate_url_substrs(url: str) -> str:
+    url_split = url.split('s0')
+
+    url_1 = url_split[0]
+    url_2 = url_split[1]
+
+    return url_1, url_2
 
 if __name__ == '__main__':
-    rc = Recipe_Crawler('https://www.chefkoch.de/rs/', 0, 't14/Asiatisch-Rezepte.html', max_pages = MAX_PAGES)
-    recipe_links = rc.collect_links(rc.search_base_url)
-    
-    for link in recipe_links:
-        print(link)
-    print(f'{len(recipe_links)} Links have been collected.')
+    result = ds.Regional_URL_Collection(payload = [])
+    #result.payload = List[ds.Regional_urls]
 
-    rc.save_target_urls(recipe_links)
+    configfile = open('src\config.json')
+    config = json.load(configfile)
+    for region in config:
+        buffer_regional_urls = []
+        for element in config[f'{region}']:
+            url_1, url_2 = generate_url_substrs(element)
+
+            rc = Recipe_Crawler(f'{url_1}', 0, f'{url_2}', max_pages = MAX_PAGES)
+            buffered_recipe_links = rc.collect_links(rc.search_base_url)
+            for item in buffered_recipe_links:
+                buffer_regional_urls.append(item)
+                print(f'{region}: {len(buffer_regional_urls)}')
+
+        temp_obj = ds.Regional_urls(
+            region = region, 
+            urls = list(buffer_regional_urls)
+        )
+
+        result.payload.append(temp_obj)
+    
+        print(f'{len(temp_obj.urls)} Links have been collected for {region}.')
+
+    rc.save_target_urls(result)

@@ -46,6 +46,7 @@ class Ingredients:
 class Recipe:
     recipe_id: str
     url: str
+    region: str
     title: str
     author: str
     properties: Properties
@@ -76,3 +77,16 @@ class Recipe_HTML_preprocessed:
         self.preparation = preparation
         self.tags = tags
         self.author = author
+
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@dataclass
+class Regional_urls:
+    region: str
+    urls: List[str]
+    
+@dataclass
+class Regional_URL_Collection:
+    payload: List[Regional_urls]
+
+    def to_json(self):
+        return json.dumps(asdict(self), indent = 2, ensure_ascii=False)
