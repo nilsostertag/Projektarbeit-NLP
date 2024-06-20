@@ -82,6 +82,7 @@ class Recipe_HTML_preprocessed:
 @dataclass
 class Regional_urls:
     region: str
+    count: int
     urls: List[str]
     
 @dataclass

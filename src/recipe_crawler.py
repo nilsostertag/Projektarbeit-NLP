@@ -107,6 +107,7 @@ if __name__ == '__main__':
 
         temp_obj = ds.Regional_urls(
             region = region, 
+            count = int(len(buffer_regional_urls)),
             urls = list(buffer_regional_urls)
         )
 
