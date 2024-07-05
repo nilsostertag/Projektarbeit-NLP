@@ -47,7 +47,6 @@ class Recipe:
     region: str
     recipe_id: str
     url: str
-    region: str
     title: str
     author: str
     properties: Properties
