@@ -1,5 +1,5 @@
 import json
-import utils.data_structures as ds
+import data_structures as ds
 from typing import List
 import os
 
@@ -19,7 +19,7 @@ def import_recipe_from_json(file_path: str) -> ds.Recipes:
                     fat = source_recipe['properties']['nutritional_values']['fat'],
                     carbs = source_recipe['properties']['nutritional_values']['carbs']
                     )
-                except: print(f'No nutritional values for {source_recipe['recipe_id']}')
+                except: print(f"No nutritional values for {source_recipe['recipe_id']}")
                 
                 imported_dish_time = None
                 # retrieve nested dish time properties
