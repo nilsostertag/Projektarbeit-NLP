@@ -1,14 +1,14 @@
 import json
 import os
+import data_handling as dh
+import data_import as di
 
-JSON_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'raw_data', 'scraped_recipes.json')
+JSON_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'raw_data', 'scraped_recipes_raw.json')
 
-def import_test(file):
-    f = open(file, encoding='utf8')
-    data = json.load(f)
-    print(len(data['payload']))
-    
-    return data
 
 if __name__ == '__main__':
-    import_test(JSON_PATH)
+    data = di.import_recipe_from_json(JSON_PATH)
+    
+    rand = dh.randomizer()
+    var = rand.get_random_recipe(data.payload, False)
+    print(var)
