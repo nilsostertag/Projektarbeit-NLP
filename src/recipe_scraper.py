@@ -1,25 +1,35 @@
+from dataclasses import asdict
 import os
 import requests
 import utils.data_structures as ds
 import utils.data_export as de
+import utils.data_import as di
 from bs4 import BeautifulSoup
 from typing import List
-from re import sub
+from re import sub, findall
 from datetime import datetime
 from math import nan
 
+import json
+
 TARGET_PATH_SAMPLE = os.path.join(os.path.dirname(__file__), '..', 'data', 'sample.txt')
 
-TARGET_PATH_URLS = os.path.join(os.path.dirname(__file__), '..', 'data', 'target_urls.txt')
-TARGET_PATH_EXPORT = os.path.join(os.path.dirname(__file__), '..', 'data', 'raw_data', 'scraped_recipes.json')
+TARGET_PATH_URLS = os.path.join(os.path.dirname(__file__), '..', 'data', 'target_urls.json')
+TARGET_PATH_EXPORT = os.path.join(os.path.dirname(__file__), '..', 'data', 'raw_data', 'scraped_recipes_raw.json')
+
+TARGET_BUFFER_SIZE = 100
+
+TARGET_REGIONS = ['asia', 'africa', 'northamerica', 'southamerica', 'europe', 'oceania']
 
 class Recipe_Scraper:
-    def __init__(self, target_url_file):
-        self.target_URLs = self.import_target_urls(file_path = target_url_file)
+    def __init__(self, target_url_file, target_buffer_size: int):
+        self.target_URLs: ds.Regional_URL_Collection = self.import_target_urls(file_path = target_url_file)
         self.buffered_HTMLs: List[ds.Recipe_HTML_preprocessed] = []
         self.scraped_recipes: ds.Recipes = ds.Recipes(payload = [])
+        self.buffer_size = target_buffer_size
+        self.current_payload: ds.Recipes = ds.Recipes(payload=[])
     
-    def buffer_recipe(self, request_url):
+    def buffer_recipe(self, request_url, a_region):
         request_buffer = requests.get(request_url).text
 
         temp_buffer_soup = BeautifulSoup(request_buffer, 'html.parser')
@@ -34,6 +44,7 @@ class Recipe_Scraper:
                 temp_buffer_prep = element
 
         temp_buffer = ds.Recipe_HTML_preprocessed(
+            region = a_region,
             url = request_url,
             header = temp_buffer_soup.find('article', class_ = 'recipe-header'),
             ingredients = temp_buffer_soup.find('article', class_ = 'recipe-ingredients'),
@@ -42,10 +53,10 @@ class Recipe_Scraper:
             tags = temp_buffer_soup.find('div', class_ = 'recipe-tags'),
             author = temp_buffer_soup.find('div', class_ = 'recipe-author')
         )
-        
+
         return temp_buffer
 
-    def scrape_data_raw(self, buffer: ds.Recipe_HTML_preprocessed) -> ds.Recipe:
+    def scrape_data_raw(self, buffer: ds.Recipe_HTML_preprocessed, counter: int) -> ds.Recipe:
         scr_url = str(buffer.url)
         scr_id = scr_url.split('/')[4]
 
@@ -107,8 +118,8 @@ class Recipe_Scraper:
         elif buffer.scr_ingredients == None:
             scr_ingredients = None
 
-
         scraped_content = ds.Recipe(
+            region = buffer.region,
             recipe_id = scr_id,
             url = scr_url,
             title = scr_title,
@@ -125,7 +136,9 @@ class Recipe_Scraper:
             preparation = scr_preparation
         )
 
-        return scraped_content
+        counter+=1
+
+        return scraped_content, counter
 
     def process_author(self, scraped_author) -> str:
         result = scraped_author.split(' ')[len(scraped_author.split(' ')) - 1]
@@ -230,41 +243,51 @@ class Recipe_Scraper:
         for element in scraped_preparation:
             buffer_str = element.text
             buffer_strings.append(buffer_str)
-
-        buffer_prep = max(buffer_strings, key = len)
-        result = buffer_prep.replace('\n', '')
+        
+        mem = ''
+        for element in buffer_strings:
+            len_alpha = int(len(findall('[a-zA-Z]', element)))
+            if len_alpha > int(len(findall('[a-zA-Z]', mem))):
+                mem = element
+            
+        result = mem.replace('\n', '')
 
         return result.lower()
 
     def import_target_urls(self, file_path):
-        target_urls = []
         with open(file_path, 'r') as target_file:
-            for target_url in target_file:
-                target_urls.append(target_url)
-
-        return target_urls
+            dataset = json.load(target_file)
+        return dataset
     
     def execute_process(self):
-        for target in self.target_URLs:
-            print(f'[{self.target_URLs.index(target)}/{len(self.target_URLs)}] Buffering {target}')
-            temp_buffer = self.buffer_recipe(target)
-            print(f'[{self.target_URLs.index(target)}/{len(self.target_URLs)}] Processing {target}')
-            temp_data = self.scrape_data_raw(temp_buffer)
-            self.scraped_recipes.payload.append(temp_data)
-            #self.buffered_HTMLs.append(temp_buffer)
-
-        """
-            for buffered_HTML in self.buffered_HTMLs:
-            print(f'[{self.buffered_HTMLs.index(buffered_HTML)}/{len(self.buffered_HTMLs)}] Processing {buffered_HTML.url}')
-            temp_data = self.scrape_data_raw(buffered_HTML)
-            self.scraped_recipes.payload.append(temp_data)
-        """
-        payload_string = self.scraped_recipes.to_json()
-        #print(payload_string)
-        de.export_to_json_v2(str(payload_string), TARGET_PATH_EXPORT)
+        counter = 0
+        for element in self.target_URLs['payload']:
+            element_region = element['region']
+            if element_region in TARGET_REGIONS:
+                url_list = element['urls']
+                for target in url_list:
+                    print(f'[{url_list.index(target)}/{len(url_list)}] Buffering {target}')
+                    temp_buffer = self.buffer_recipe(target, element_region)
+                    print(f'[{url_list.index(target)}/{len(url_list)}] Processing {target}')
+                    temp_data, counter = self.scrape_data_raw(temp_buffer, counter)
+                    self.scraped_recipes.payload.append(temp_data)
+                    
+                    if(counter >= self.buffer_size):
+                        print(f'Buffer size of {self.buffer_size} reached.')
+                        print(len(self.scraped_recipes.payload))
+                        self.current_payload = di.import_recipe_from_json(TARGET_PATH_EXPORT)
+                        for element in self.scraped_recipes.payload:
+                            self.current_payload.payload.append(element)
+                        self.scraped_recipes.payload.clear()
+                        print(len(self.scraped_recipes.payload))
+                        print('Successfully cleared buffer')
+                        payload_string = self.current_payload.to_json()
+                        de.export_to_json_v2(str(payload_string), TARGET_PATH_EXPORT)
+                        self.current_payload.payload.clear()
+                        counter = 0
 
         
 
 if __name__ == '__main__':
-    rs = Recipe_Scraper(target_url_file = TARGET_PATH_URLS)
+    rs = Recipe_Scraper(target_url_file = TARGET_PATH_URLS, target_buffer_size = TARGET_BUFFER_SIZE)
     rs.execute_process()

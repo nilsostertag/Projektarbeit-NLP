@@ -44,6 +44,7 @@ class Ingredients:
 
 @dataclass
 class Recipe:
+    region: str
     recipe_id: str
     url: str
     title: str
@@ -67,12 +68,27 @@ class Recipes:
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Data structure for recipe scraping process
+@dataclass
 class Recipe_HTML_preprocessed:
-    def __init__(self, url, header: bs4.element.Tag, ingredients: bs4.element.Tag, nutrition: bs4.element.Tag, preparation: bs4.element.Tag, tags: bs4.element.Tag, author: bs4.element.Tag):
-        self.url = url
-        self.header = header
-        self.ingredients = ingredients
-        self.nutrition = nutrition
-        self.preparation = preparation
-        self.tags = tags
-        self.author = author
+    region: str
+    url: str
+    header: bs4.element.Tag
+    ingredients: bs4.element.Tag
+    nutrition: bs4.element.Tag
+    preparation: bs4.element.Tag
+    tags: bs4.element.Tag
+    author: bs4.element.Tag
+
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@dataclass
+class Regional_urls:
+    region: str
+    count: int
+    urls: List[str]
+    
+@dataclass
+class Regional_URL_Collection:
+    payload: List[Regional_urls]
+
+    def to_json(self):
+        return json.dumps(asdict(self), indent = 2, ensure_ascii=False)
