@@ -65,6 +65,24 @@ class Recipes:
         #self.properties = Properties(**self.properties)
         #self.ingredients = [Ingredient(**ingredient) for ingredient in self.ingredients]
 
+@dataclass
+class Recipe_Tokenized:
+    region: str
+    recipe_id: str
+    url: str
+    title: str
+    author: str
+    properties: Properties
+    ingredients: Ingredients
+    preparation: List[str]
+
+@dataclass
+class Recipes_Tokenized:
+    payload: List[Recipe_Tokenized]
+
+    def to_json(self):
+        return json.dumps(asdict(self), indent = 2, ensure_ascii=False)
+
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Data structure for recipe scraping process

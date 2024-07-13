@@ -282,7 +282,7 @@ class Recipe_Scraper:
                         print(len(self.scraped_recipes.payload))
                         print('Successfully cleared buffer')
                         payload_string = self.current_payload.to_json()
-                        de.export_to_json_v2(str(payload_string), TARGET_PATH_EXPORT)
+                        de.export_to_json(str(payload_string), TARGET_PATH_EXPORT)
                         self.current_payload.payload.clear()
                         counter = 0
 
