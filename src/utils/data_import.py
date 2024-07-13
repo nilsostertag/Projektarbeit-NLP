@@ -1,5 +1,5 @@
 import json
-import data_structures as ds
+import utils.data_structures as ds
 from typing import List
 import os
 
